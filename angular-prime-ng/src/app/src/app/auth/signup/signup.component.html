@@ -1,0 +1,60 @@
+<html>
+<head>
+  <title>Sign up Form</title>
+</head>
+<ng-container class="container">
+<h1>Sign Up Form</h1>
+<p-card [style]="{'width': '25rem', 'margin-bottom': 'zero'}">
+  <form [formGroup]="formGroup" (ngSubmit)="signUp()">
+    <div class="p-field">
+      <label for="userName"><span class="pi pi-user-edit"></span>User Name</label>
+      <input id="userName" type="text" pInputText formControlName="username" required>
+
+    </div>
+
+    <div class="p-field">
+      <label for="firstName"><span class="pi pi-user-edit"></span>First Name</label>
+      <input id="firstName" type="text" pInputText formControlName="firstName" required>
+
+    </div>
+
+    <div class="p-field">
+      <label for="lastName"><span class="pi pi-user-edit"></span>Last Name</label>
+      <input id="lastName" type="text" pInputText formControlName="lastName" required>
+
+    </div>
+
+    <div class="p-field">
+      <label for="dateOfBirth"><span class="pi pi-calendar"></span>Date of Birth</label>
+      <p-calendar formControlName="dateOfBirth" dateFormat="dd.mm.yy"></p-calendar>
+    </div>
+
+    <fieldset>
+      <legend>Select your gender</legend>
+      <div *ngFor="let category of categories" class="field-checkbox">
+        <input type="radio" [id]="category" [value]="category" formControlName="selectedCategory">
+        <label [for]="category">{{ category }}</label>
+      </div>
+    </fieldset>
+
+
+
+    <div class="p-field">
+      <label for="selectedCountry"><span class="pi pi-map-marker"></span> Country: </label>
+      <p-dropdown formControlName="selectedCountry" [options]="countries" optionLabel="NAME" placeholder="Select a country"></p-dropdown>
+    </div>
+
+    <div class="p-field">
+      <label for="password"> <span class="pi pi-lock"></span>password </label>
+      <input id="password" type="text" pPassword formControlName="password"  name="password" required >
+    </div>
+
+
+
+    <div class="p-field">
+      <button type="submit" pButton label="Sign Up"><span class="pi pi-sign-in"></span></button>
+    </div>
+  </form>
+</p-card>
+</ng-container>
+</html>

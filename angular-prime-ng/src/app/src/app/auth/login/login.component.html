@@ -1,20 +1,30 @@
-<div class="login-container">
+<ng-container  class="login-container">
 
  <p-card header= "User Login" [style]="{'width': '25rem', 'margin-bottom': 'zero'}">
 
-  <form (ngSubmit)="login()">
+  <form [formGroup]="formGroup" (ngSubmit)="login()">
+
+
   <div class="p-field">
     <label for="username"><span class="pi pi-user"></span>Username </label>
-    <input id="username" type="text" pInputText [(ngModel)]="username"  name="username" required >
+    <input id="username" type="text" pInputText formControlName="username" name="username" required >
   </div>
 
   <div class="p-field">
     <label for="password"> <span class="pi pi-lock"></span>password </label>
-    <input id="password" type="text" pPassword [(ngModel)]="password"  name="password" required >
+    <input id="password" type="text" pPassword formControlName="password"  name="password" required >
   </div>
+
+
+
 
   <button type="submit" pButton label="Login"><span class="pi pi-sign-in"></span></button>
 
+
   </form>
+   <p>Dont have an account? <a routerLink="/signup">Sign Up</a></p>
  </p-card>
-</div>
+
+
+
+</ng-container>

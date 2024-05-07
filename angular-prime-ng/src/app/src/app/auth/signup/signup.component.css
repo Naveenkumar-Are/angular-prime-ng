@@ -1,0 +1,27 @@
+/* signup.component.css */
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+
+.field-checkbox{
+  padding: 20px;
+  border: 1px ;
+
+}
+.form {
+  width: 400px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.p-field{
+  padding: 20px;
+  border: 1px ;
+  border-radius: 5px;
+}
+/* Add space between form elements */
