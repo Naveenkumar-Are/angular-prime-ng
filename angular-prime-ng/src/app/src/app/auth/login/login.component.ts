@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators, ɵElement} from "@angular/forms";
 import {AuthService} from "../auth.service";
 import {Router} from "@angular/router";
-import {AppState} from "../../reducers";
+import {AppState} from "../reducers";
 import {Store} from "@ngrx/store";
 import {noop, tap, TapObserver} from "rxjs";
 import {User} from "../../model/user.model";

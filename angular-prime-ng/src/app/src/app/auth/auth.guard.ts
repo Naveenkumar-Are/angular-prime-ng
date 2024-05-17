@@ -2,9 +2,10 @@ import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTre
 import {Observable, tap} from "rxjs";
 import {select, Store} from "@ngrx/store";
 import {isLoggedin} from "./auth.selectors";
-import {AppState} from "../reducers";
+import {AppState} from "./reducers";
+import {Injectable} from "@angular/core";
 
-
+@Injectable()
 export class AuthGuard implements CanActivate{
 
   constructor(

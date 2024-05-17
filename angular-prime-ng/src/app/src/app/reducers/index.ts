@@ -1,36 +1,30 @@
-import {User} from "../model/user.model";
-import {UserSignUp} from "../model/userSignUp.model";
+import {
+  ActionReducerMap,
+  ActionReducer,
+  MetaReducer, createReducer
+} from "@ngrx/store";
 
-import {createReducer, on} from "@ngrx/store";
-import {AuthActions} from "../auth/action-types";
+import {environment} from "../../environments/environment";
+import {routerReducer} from '@ngrx/router-store';
 import {state} from "@angular/animations";
 
-
 export interface AppState{
-  user:User;
+
 }
 
-
-export interface AuthState{
-  user:User | undefined ;
-}
-
-export  const initialAuthState: AuthState= {
-  user: undefined
+export const reducers: ActionReducerMap<AppState>={
+  router:routerReducer,
 };
 
-export const authReducer= createReducer(
-  initialAuthState, on(AuthActions.login,(state,action)=>{
-    return{
-      user:action.user
-    }
-}),
+export function logger (reducer: ActionReducer<any>)
+  :ActionReducer<any>{
+  return (state,action)=> {
+    console.log("state before: ", state);
+    console.log('action', action);
 
-  on(AuthActions.logOut,(state,action)=>{
-    return {
-      user: undefined
-    }
-  })
+    return reducer(state, action);
+  }
+}
 
-
-);
+export const metaReducers: MetaReducer<AppState>[]=
+  !environment.production ? [logger]:[];

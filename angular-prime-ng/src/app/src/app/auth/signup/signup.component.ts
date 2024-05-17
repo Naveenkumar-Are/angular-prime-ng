@@ -32,12 +32,12 @@ export class SignupComponent implements OnInit {
   }
 
   signUp() {
-    if (this.formGroup.valid) {
-
-      console.log('Form submitted with values: ', this.formGroup.value);
-    } else {
+   // if (this.formGroup.valid) {
+  alert("Signd up")
+      console.log('Form submitted with values: ', )//this.formGroup.value);
+   // } else {
       console.log('Form is invalid');
-    }
+  //  }
   }
 }
 

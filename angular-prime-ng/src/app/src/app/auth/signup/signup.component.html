@@ -26,8 +26,9 @@
 
     <div class="p-field">
       <label for="dateOfBirth"><span class="pi pi-calendar"></span>Date of Birth</label>
-      <p-calendar formControlName="dateOfBirth" dateFormat="dd.mm.yy"></p-calendar>
+      <p-calendar id="dateOfBirth" formControlName="dateOfBirth" dateFormat="dd.mm.yy"></p-calendar>
     </div>
+
 
     <fieldset>
       <legend>Select your gender</legend>
@@ -41,18 +42,20 @@
 
     <div class="p-field">
       <label for="selectedCountry"><span class="pi pi-map-marker"></span> Country: </label>
-      <p-dropdown formControlName="selectedCountry" [options]="countries" optionLabel="NAME" placeholder="Select a country"></p-dropdown>
-    </div>
-
-    <div class="p-field">
-      <label for="password"> <span class="pi pi-lock"></span>password </label>
-      <input id="password" type="text" pPassword formControlName="password"  name="password" required >
+      <p-dropdown id="selectedCountry" formControlName="selectedCountry" [options]="countries" optionLabel="NAME" placeholder="Select a country"></p-dropdown>
     </div>
 
 
+    <div class="p-field">
+      <label for="passwordInput"><span class="pi pi-lock"></span>Password</label>
+      <input id="passwordInput" type="password" pPassword formControlName="password" name="password" required>
+    </div>
+
+
+
 
     <div class="p-field">
-      <button type="submit" pButton label="Sign Up"><span class="pi pi-sign-in"></span></button>
+      <button type="submit" (click)="signUp()" pButton label="Sign Up"><span class="pi pi-sign-in"></span></button>
     </div>
   </form>
 </p-card>

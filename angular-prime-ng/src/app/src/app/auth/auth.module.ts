@@ -1,6 +1,7 @@
 import {ModuleWithProviders, NgModule} from "@angular/core";
 import {EffectsModule} from "@ngrx/effects";
-import {authReducer} from "../reducers";
+import {authReducer} from "./reducers";
+import { HttpClientModule } from '@angular/common/http';
 import {LoginComponent} from "./login/login.component";
 import {AuthGuard} from "./auth.guard";
 import {AuthService} from "./auth.service";
@@ -17,6 +18,7 @@ import {CardModule} from "primeng/card";
 import {DropdownModule} from "primeng/dropdown";
 import {CalendarIcon} from "primeng/icons/calendar";
 import {CalendarModule} from "primeng/calendar";
+import {HttpClient} from "@angular/common/http";
 
 @NgModule({
   imports:[
@@ -28,7 +30,7 @@ import {CalendarModule} from "primeng/calendar";
     CardModule,
     DropdownModule,
     ReactiveFormsModule,
-
+    HttpClientModule,
     CalendarIcon,
     CalendarModule,
     RouterModule.forChild([{path:'',component:LoginComponent}]),

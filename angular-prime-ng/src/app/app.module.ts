@@ -20,10 +20,16 @@ import {AnimateOnScrollModule} from "primeng/animateonscroll";
 import {ChartModule} from "primeng/chart";
 import { SignupComponent } from './src/app/auth/signup/signup.component';
 import {RadioButtonModule} from "primeng/radiobutton";
+
+
 import {EffectsModule} from "@ngrx/effects";
 import {AuthModule} from "./src/app/auth/auth.module";
 import {StoreDevtoolsModule} from "@ngrx/store-devtools";
-import {RouterState, Routes} from "@angular/router";
+import {RouterModule, Routes} from "@angular/router";
+import {environment} from './src/environments/environment'
+import { RouterState, StoreRouterConnectingModule } from '@ngrx/router-store';
+
+import {metaReducers,reducers} from './src/app/reducers';
 import {StoreModule} from "@ngrx/store";
 import {AuthGuard} from "./src/app/auth/auth.guard";
 
@@ -67,8 +73,11 @@ const routes :Routes=[
 
     }),
     EffectsModule.forRoot([]),
-    StoreDevtoolsModule.instrument({maxAge: 25,}),
-
+    StoreDevtoolsModule.instrument({maxAge: 25,logOnly:environment.production}),
+   StoreRouterConnectingModule.forRoot({
+    stateKey:'router',
+      routerState: RouterState.Minimal
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
