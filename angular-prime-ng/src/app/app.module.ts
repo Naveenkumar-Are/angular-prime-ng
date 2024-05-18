@@ -27,7 +27,7 @@ import {AuthModule} from "./src/app/auth/auth.module";
 import {StoreDevtoolsModule} from "@ngrx/store-devtools";
 import {RouterModule, Routes} from "@angular/router";
 import {environment} from './src/environments/environment'
-import { RouterState, StoreRouterConnectingModule } from '@ngrx/router-store';
+import { RouterState, StoreRouterConnectingModule } from "@ngrx/router-store";
 
 import {metaReducers,reducers} from './src/app/reducers';
 import {StoreModule} from "@ngrx/store";

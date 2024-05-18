@@ -1,12 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators, ɵElement} from "@angular/forms";
-import {AuthService} from "../auth.service";
-import {Router} from "@angular/router";
-import {AppState} from "../reducers";
-import {Store} from "@ngrx/store";
-import {noop, tap, TapObserver} from "rxjs";
-import {User} from "../../model/user.model";
-import {login} from "../auth.actions";
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { AuthService } from "../auth.service";
+import { Router } from "@angular/router";
+import { Store } from "@ngrx/store";
+import { AppState } from "../reducers";
+import { login } from "../auth.actions";
 
 @Component({
   selector: 'app-login',
@@ -14,43 +12,46 @@ import {login} from "../auth.actions";
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  country: string="";
-  username: string ="";
-  password: string="";
 
-  formGroup: FormGroup= new FormGroup({});
+  formGroup!: FormGroup;
 
+  constructor(
+    private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private router: Router,
+    private store: Store<AppState>
+  ) {}
 
-  constructor(private formBuilder: FormBuilder,
-  private auth: AuthService,
-              private router: Router,
-              private store: Store<AppState>
-  ){
+  ngOnInit() {
+    this.initForm();
+  }
 
+  initForm() {
+    this.formGroup = this.formBuilder.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required]
+    });
+  }
 
-}
-ngOnInit(){
-  this.formGroup=this.formBuilder.group({
-    username: ['',Validators.required],
-    password: ['',Validators.required],
-
-  });
-
-}
   login() {
-   const val= this.formGroup.value;
+    if (this.formGroup.valid) {
+      const { username, password } = this.formGroup.value;
+      this.authService.login(username, password)
+        .subscribe(
+          user => {
+            console.log(user);
+            this.store.dispatch(login({ user }));
 
-   this.auth.login(val.username,val.password)
-     .pipe(
-       tap(user=>{
-         console.log(user);
-         this.store.dispatch(login({user}));
-       // this.router.navigateByUrl('/products')
-    })
-     ).subscribe(
-       noop,
-      ()=> alert('login failed')
-    )
+            this.router.navigateByUrl('/attendance');
+          },
+          error => {
+            console.error('Login failed:', error);
+            alert('Login failed. Please try again.');
+          }
+        );
+    } else {
 
+      console.error('Form validation failed:', this.formGroup.errors);
+    }
   }
 }
