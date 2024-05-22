@@ -1,4 +1,4 @@
-/* signup.component.css */
+
 
 .container {
   display: flex;
@@ -6,7 +6,10 @@
   align-items: center;
   height: 100vh;
 }
-
+label{
+  font-weight: bold;
+  color:black;
+}
 
 .field-checkbox{
   padding: 20px;
@@ -24,4 +27,4 @@
   border: 1px ;
   border-radius: 5px;
 }
-/* Add space between form elements */
+

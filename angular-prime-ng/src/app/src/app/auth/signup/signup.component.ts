@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { Router } from "@angular/router";
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { AppState } from "../reducers";
-import { signup } from "../auth.actions";
+import { AppState } from '../reducers';
+import { signup } from '../auth.actions';
+import { User } from '../../model/user.model';
+
 
 @Component({
   selector: 'app-signup',
@@ -12,14 +13,17 @@ import { signup } from "../auth.actions";
 })
 export class SignupComponent implements OnInit {
   formGroup!: FormGroup;
-  countries = [{ NAME: 'India' }, { NAME: 'Pakistan' }, { NAME: 'Nepal' }, { NAME: 'USA' }, { NAME: 'Canada' }, { NAME: 'Sri Lanka' }, { NAME: 'UAE' }, { NAME: 'Mexico' }];
+  countries = [
+    { NAME: 'India' }, { NAME: 'Pakistan' }, { NAME: 'Nepal' },
+    { NAME: 'USA' }, { NAME: 'Canada' }, { NAME: 'Sri Lanka' },
+    { NAME: 'UAE' }, { NAME: 'Mexico' }
+  ];
   categories = ['Male', 'Female', 'Other'];
 
   constructor(
     private formBuilder: FormBuilder,
-    private store: Store<AppState>,
-    private router: Router
-  ) { }
+    private store: Store<AppState>
+  ) {}
 
   ngOnInit() {
     this.initializeForm();
@@ -28,26 +32,36 @@ export class SignupComponent implements OnInit {
   initializeForm() {
     this.formGroup = this.formBuilder.group({
       username: ['', Validators.required],
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
+      firstname: ['', Validators.required],
+      lastname: ['', Validators.required],
       dateOfBirth: [null, Validators.required],
-      selectedCategory: ['', Validators.required],
-      selectedCountry: [null, Validators.required],
-      password: ['', Validators.required],
+      gender: ['', Validators.required],
+      country: [null, Validators.required],
+      password: ['', Validators.required]
     });
   }
 
   signUp() {
     if (this.formGroup.valid) {
-      // Log form values before dispatching action
-      const formData = this.formGroup.value;
-      console.log('Form Data:', formData);
+      const formValues = this.formGroup.value;
 
-      // Dispatch signUp action with form data
-      this.store.dispatch(signup(({ user: formData })));
+      const user: User = {
+        username: formValues.username,
+        firstname: formValues.firstname,
+        lastname: formValues.lastname,
+        dateOfBirth: formValues.dateOfBirth,
+        gender: formValues.gender,
+        country: formValues.country.NAME,
+        password: formValues.password
+      };
+
+      console.log('Form Data:', user);
+      this.store.dispatch(signup({ user }));
     } else {
       console.log('Form is invalid');
+      this.formGroup.markAllAsTouched();
     }
   }
 }
+
 

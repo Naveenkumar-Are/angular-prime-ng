@@ -1,30 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sign up Form</title>
+  <link rel="stylesheet" href="./login.component.scss">
+</head>
+<body>
+
 <ng-container  class="login-container">
 
- <p-card header= "User Login" [style]="{'width': '25rem', 'margin-bottom': 'zero'}">
+  <p-card header= "User Login" [style]="{'width': '25rem', 'margin-bottom': 'zero','background-color': 'antiquewhite'}">
 
-  <form [formGroup]="formGroup" (ngSubmit)="login()">
-
-
-  <div class="p-field">
-    <label for="username"><span class="pi pi-user"></span>Username </label>
-    <input id="username" type="text" pInputText formControlName="username" name="username" required >
-  </div>
-
-  <div class="p-field">
-    <label for="password"> <span class="pi pi-lock"></span>password </label>
-    <input id="password" type="text" pPassword formControlName="password"  name="password" required >
-  </div>
+    <form [formGroup]="formGroup" (ngSubmit)="login()">
 
 
+      <div class="p-field">
+        <label for="username"><span class="pi pi-user"></span>Username </label>
+        <input id="username" type="text" pInputText formControlName="username" name="username" required >
+      </div>
+
+      <div class="p-field">
+        <label for="password"> <span class="pi pi-lock"></span>password </label>
+        <input id="password" type="password" pPassword formControlName="password"  name="password" required >
+      </div>
 
 
-  <button type="submit" (click)="login()" pButton label="Login"><span class="pi pi-sign-in"></span></button>
 
 
-  </form>
-   <p>Dont have an account? <a routerLink="/signup">Sign Up</a></p>
- </p-card>
+      <button type="submit" pButton label="Login"><span class="pi pi-sign-in"></span></button>
+
+
+
+    </form>
+
+    <hr>
+    <p>Dont have an account? <a routerLink="/signup">Login </a></p>
+  </p-card>
 
 
 
 </ng-container>
+
+</body>
+</html>
+

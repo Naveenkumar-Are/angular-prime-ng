@@ -4,7 +4,7 @@ import {User} from "../model/user.model";
 
 export const login=
   createAction( '[Login page] User Login Page'
-    ,props<{user: User}>()
+    , props<{ username: string; password: string }>()
   );
 
 export const signup = createAction(

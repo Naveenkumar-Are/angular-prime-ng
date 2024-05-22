@@ -16,39 +16,37 @@ export const initialAuthState: AuthState = {
 
 export const authReducer = createReducer(
   initialAuthState,
-  on(AuthActions.login, (state, action) => {
+  on(AuthActions.loginSuccess, (state, {user}) => {
     return {
       ...state,
-      user: action.user
+      user
     };
   }),
 
-  on(AuthActions.signup, (state, action) => {
-    return {
-      ...state,
-      user: undefined // Assuming signup clears previous user info
-    };
-  }),
+  on(AuthActions.signup, (state, action) => ({
+    ...state,
+    error: undefined // Clear any previous errors
+  })),
+  // Handle signup success
+  on(AuthActions.signupSuccess, (state, { message }) => ({
+    ...state,
+    error: undefined // Clear any previous errors
+    // You can add any additional state updates if needed
+  })),
+  // Handle signup failure
+  on(AuthActions.signupFailure, (state, { error }) => ({
+    ...state,
+    error // Store the error in the state
+  })),
+  // Handle logout action
+  on(AuthActions.logOut, state => ({
+    ...state,
+    user: undefined, // Clear the user from the state
+    error: undefined // Clear any errors
+  }))
 
-  on(AuthActions.signupSuccess, (state, action) => {
-    return {
-      ...state,
-      // Handle any additional logic based on signup success if needed
-    };
-  }),
 
-  on(AuthActions.signupFailure, (state, action) => {
-    return {
-      ...state,
-      // Handle any error state or rollback changes if needed
-    };
-  }),
 
-  on(AuthActions.logOut, (state, action) => {
-    return {
-      ...state,
-      user: undefined
-    };
-  })
+
 );
 

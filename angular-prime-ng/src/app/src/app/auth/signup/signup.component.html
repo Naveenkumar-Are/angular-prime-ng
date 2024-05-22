@@ -2,62 +2,77 @@
 <head>
   <title>Sign up Form</title>
 </head>
+<body>
 <ng-container class="container">
-<h1>Sign Up Form</h1>
-<p-card [style]="{'width': '25rem', 'margin-bottom': 'zero'}">
-  <form [formGroup]="formGroup" (ngSubmit)="signUp()">
-    <div class="p-field">
-      <label for="userName"><span class="pi pi-user-edit"></span>User Name</label>
-      <input id="userName" type="text" pInputText formControlName="username" required>
-
-    </div>
-
-    <div class="p-field">
-      <label for="firstName"><span class="pi pi-user-edit"></span>First Name</label>
-      <input id="firstName" type="text" pInputText formControlName="firstName" required>
-
-    </div>
-
-    <div class="p-field">
-      <label for="lastName"><span class="pi pi-user-edit"></span>Last Name</label>
-      <input id="lastName" type="text" pInputText formControlName="lastName" required>
-
-    </div>
-
-    <div class="p-field">
-      <label for="dateOfBirth"><span class="pi pi-calendar"></span>Date of Birth</label>
-      <p-calendar id="dateOfBirth" formControlName="dateOfBirth" dateFormat="dd.mm.yy"></p-calendar>
-    </div>
-
-
-    <fieldset>
-      <legend>Select your gender</legend>
-      <div *ngFor="let category of categories" class="field-checkbox">
-        <input type="radio" [id]="category" [value]="category" formControlName="selectedCategory">
-        <label [for]="category">{{ category }}</label>
+  <h1>Sign Up Form</h1>
+  <p-card [style]="{'width': '25rem', 'margin-bottom': 'zero','background-color': 'antiquewhite'}">
+    <form [formGroup]="formGroup" (ngSubmit)="signUp()">
+      <div class="p-field">
+        <label for="username"><span class="pi pi-user-edit"></span>User Name</label>
+        <input id="username" type="text" pInputText formControlName="username" />
+        <div *ngIf="formGroup.get('username')?.invalid && formGroup.get('username')?.touched" class="error">
+          User Name is required.
+        </div>
       </div>
-    </fieldset>
 
+      <div class="p-field">
+        <label for="firstname"><span class="pi pi-user-edit"></span>First Name</label>
+        <input id="firstname" type="text" pInputText formControlName="firstname" />
+        <div *ngIf="formGroup.get('firstname')?.invalid && formGroup.get('firstname')?.touched" class="error">
+          First Name is required.
+        </div>
+      </div>
 
+      <div class="p-field">
+        <label for="lastname"><span class="pi pi-user-edit"></span>Last Name</label>
+        <input id="lastname" type="text" pInputText formControlName="lastname" />
+        <div *ngIf="formGroup.get('lastname')?.invalid && formGroup.get('lastname')?.touched" class="error">
+          Last Name is required.
+        </div>
+      </div>
 
-    <div class="p-field">
-      <label for="selectedCountry"><span class="pi pi-map-marker"></span> Country: </label>
-      <p-dropdown id="selectedCountry" formControlName="selectedCountry" [options]="countries" optionLabel="NAME" placeholder="Select a country"></p-dropdown>
-    </div>
+      <div class="p-field">
+        <label for="dateOfBirth"><span class="pi pi-calendar"></span>Date of Birth</label>
+        <p-calendar id="dateOfBirth" formControlName="dateOfBirth" dateFormat="dd.mm.yy"></p-calendar>
+        <div *ngIf="formGroup.get('dateOfBirth')?.invalid && formGroup.get('dateOfBirth')?.touched" class="error">
+          Date of Birth is required.
+        </div>
+      </div>
 
+      <fieldset>
+        <legend>Select your gender</legend>
+        <div *ngFor="let category of categories" class="field-checkbox">
+          <input type="radio" [id]="category" [value]="category" formControlName="gender">
+          <label [for]="category">{{ category }}</label>
+        </div>
+        <div *ngIf="formGroup.get('gender')?.invalid && formGroup.get('gender')?.touched" class="error">
+          Gender is required.
+        </div>
+      </fieldset>
 
-    <div class="p-field">
-      <label for="passwordInput"><span class="pi pi-lock"></span>Password</label>
-      <input id="passwordInput" type="password" pPassword formControlName="password" name="password" required>
-    </div>
+      <div class="p-field">
+        <label for="country"><span class="pi pi-map-marker"></span> Country: </label>
+        <p-dropdown id="country" formControlName="country" [options]="countries" optionLabel="NAME" placeholder="Select a country"></p-dropdown>
+        <div *ngIf="formGroup.get('country')?.invalid && formGroup.get('country')?.touched" class="error">
+          Country is required.
+        </div>
+      </div>
 
+      <div class="p-field">
+        <label for="password"><span class="pi pi-lock"></span>Password</label>
+        <input id="password" type="password" pPassword formControlName="password" />
+        <div *ngIf="formGroup.get('password')?.invalid && formGroup.get('password')?.touched" class="error">
+          Password is required.
+        </div>
+      </div>
 
-
-
-    <div class="p-field">
-      <button type="submit" (click)="signUp()" pButton label="Sign Up"><span class="pi pi-sign-in"></span></button>
-    </div>
-  </form>
-</p-card>
+      <div class="p-field">
+        <button type="submit" pButton label="Sign Up"><span class="pi pi-sign-in"></span></button>
+      </div>
+    </form>
+    <hr>
+    <p>Already have an account? <a routerLink="/login">Sign Up</a></p>
+  </p-card>
 </ng-container>
+</body>
 </html>

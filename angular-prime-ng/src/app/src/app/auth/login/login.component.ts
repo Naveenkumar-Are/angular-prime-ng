@@ -36,21 +36,8 @@ export class LoginComponent implements OnInit {
   login() {
     if (this.formGroup.valid) {
       const { username, password } = this.formGroup.value;
-      this.authService.login(username, password)
-        .subscribe(
-          user => {
-            console.log(user);
-            this.store.dispatch(login({ user }));
-
-            this.router.navigateByUrl('/attendance');
-          },
-          error => {
-            console.error('Login failed:', error);
-            alert('Login failed. Please try again.');
-          }
-        );
+      this.store.dispatch(login({ username, password }));
     } else {
-
       console.error('Form validation failed:', this.formGroup.errors);
     }
   }
